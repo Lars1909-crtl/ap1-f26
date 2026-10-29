@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="AP1 F26">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>AP1 Mechatroniker 2026 - Lars1909-crtl</title>
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiQVAxIE1lY2hhdHJvbmlrZXIgMjAyNiIsInNob3J0X25hbWUiOiJBUTEgRjI2IiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBBMEEwQiIsInRoZW1lX2NvbG9yIjoiIzBBODRGRiJ9">
+<style>
+:root{--bg:#0A0A0B;--surface:#151517;--surface2:#1E1E20;--border:#2A2A2E;--text:#F5F5F7;--text2:#9A9AA0;--accent:#0A84FF;--success:#30D158;--accentSoft:rgba(10,132,255,0.12)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,SF Pro Display,Segoe UI,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased}
+header{position:sticky;top:0;z-index:10;backdrop-filter:blur(20px);background:rgba(10,10,11,0.8);border-bottom:1px solid var(--border);padding:14px 16px;display:flex;align-items:center;justify-content:space-between}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--success);color:white;font-size:11px;font-weight:700;letter-spacing:0.02em}
+.tabs{display:flex;gap:8px;padding:12px 16px;overflow:auto;border-bottom:1px solid var(--border);position:sticky;top:61px;background:var(--bg);z-index:9}
+.tab{white-space:nowrap;padding:8px 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer}
+.tab.active{background:var(--accentSoft);border-color:rgba(10,132,255,0.3);color:var(--accent)}
+main{max-width:1024px;margin:0 auto;padding:16px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:16px 18px;margin-bottom:12px}
+h2{font-size:22px;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px}
+h3{font-size:16px;font-weight:700;margin-bottom:4px}
+p.small{font-size:13px;color:var(--text2);line-height:1.5}
+.grid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:768px){.grid{grid-template-columns:1fr 1fr}}
+.day{display:flex;gap:12px;align-items:flex-start}
+.check{width:32px;height:32px;border-radius:10px;border:2px solid var(--border);background:var(--surface2);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;font-weight:700}
+.check.done{background:var(--success);border-color:var(--success);color:white}
+.chip{display:inline-flex;padding:3px 8px;border-radius:999px;background:var(--surface2);border:1px solid var(--border);font-size:11px;font-weight:600;color:var(--text2);margin-top:6px}
+.kon-list{margin-top:8px;padding-left:16px}
+.kon-list li{font-size:13px;color:var(--text2);margin:3px 0}
+.qrbox{background:white;border-radius:20px;padding:20px;display:flex;flex-direction:column;align-items:center;gap:12px}
+pre.url{font-size:11px;background:var(--surface2);border:1px solid var(--border);padding:8px 12px;border-radius:10px;word-break:break-all}
+button.primary{width:100%;height:44px;border-radius:12px;background:var(--accent);color:white;border:none;font-weight:700;font-size:14px;cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+<div style="display:flex;align-items:center;gap:12px"><div style="width:36px;height:36px;border-radius:12px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800">AP1</div><div><div style="font-weight:700;font-size:15px">Mechatroniker 2026</div><div style="font-size:11px;color:var(--text2);letter-spacing:0.08em;text-transform:uppercase">Lars1909-crtl • iPad Pro</div></div></div>
+<span class="badge"><span style="width:6px;height:6px;background:white;border-radius:50%;display:inline-block"></span> LIVE auf Lars1909-crtl.github.io/ap1-f26</span>
+</header>
+
+<div class="tabs" id="tabs"></div>
+<main id="main"></main>
+
+<script>
+const LIVE_URL = "https://Lars1909-crtl.github.io/ap1-f26/";
+const LERNTAGE = [
+{tag:1,thema:"Elektrische Grundgrößen",kat:"Grundlagen Elektrotechnik",koennen:["Spannung U, Strom I, Widerstand R, Leistung P","Einheiten und Präfixe m, k, M, µ sicher umrechnen","Ohmsches Gesetz I=U/R und P=U·I","Reihen- und Parallelschaltung berechnen"]},
+{tag:2,thema:"Messen und Prüfen",kat:"Grundlagen Elektrotechnik",koennen:["Multimeter richtig anschließen, Messbereiche wählen","Spannung, Strom, Widerstand und Durchgang messen","Messfehler und Eigenverbrauch erkennen","Messprotokoll sauber dokumentieren"]},
+{tag:3,thema:"Schutzmaßnahmen und Sicherheit",kat:"Grundlagen Elektrotechnik",koennen:["Schutzleiter PE grün/gelb – Funktion und Prüfung","Schutzklassen I, II, III am Symbol erkennen","FI und LS – Unterschied und Einsatz","5 Sicherheitsregeln im Kopf, PSA benennen"]},
+{tag:4,thema:"Leitungen, Betriebsmittel, Farben",kat:"Grundlagen Elektrotechnik",koennen:["Aderfarben nach DIN EN 60446: Blau N, braun/schwarz/grau L, grün/gelb PE","Leitungsquerschnitte und Schutzarten IP","Klemmen, Aderendhülsen, Zugentlastung fachgerecht","Schaltplanzeichen für Betriebsmittel lesen"]},
+{tag:5,thema:"Bauteile und Sensorik Grundlagen",kat:"Grundlagen Elektrotechnik",koennen:["Widerstände, NTC PTC, Kondensator, Spule","Diode, LED mit Vorwiderstand berechnen","PNP schaltet +24V, NPN schaltet 0V","Induktiver, kapazitiver und optischer Sensor – was erkennt was"]},
+{tag:6,thema:"Motoren und Motorschutz",kat:"Grundlagen Elektrotechnik",koennen:["Gleichstrom-, Drehstrommotor Grundprinzip","Anlaufarten direkt, Stern-Dreieck","Motorschutzschalter einstellen und begründen","Überlastkennlinie und Kurzschlussschutz"]},
+{tag:7,thema:"Wiederholung und Fehlersuche ET",kat:"Grundlagen Elektrotechnik",koennen:["Alle Formeln ET auswendig erklären können","Systematische Fehlersuche: Sicht, Messen, Eingrenzen","Kleinspannung 24V PELV vs SELV unterscheiden","Eigene Anlage dokumentieren und übergeben"]},
+{tag:8,thema:"Steuerungstechnik Grundlagen",kat:"Steuerungstechnik",koennen:["EVA-Prinzip Eingabe Verarbeitung Ausgabe","Logische Verknüpfungen AND OR NOT Wahrheitstabelle","Signalfluss und Wirkungsplan zeichnen","Ruhestromprinzip bei Sicherheit verstehen"]},
+{tag:9,thema:"SPS Hardware und Zyklus",kat:"Steuerungstechnik",koennen:["Aufbau SPS, CPU, E/A Baugruppen","Zyklus: Eingänge lesen – Programm – Ausgänge schreiben","Merker M vs Ausgang Q – wann was nutzen","Zykluszeit und Auswirkungen auf schnelle Signale"]},
+{tag:10,thema:"Programmieren FUP/KOP",kat:"Steuerungstechnik",koennen:["Selbsthaltung mit dominierend Aus programmieren","Verriegelung und Flankenauswertung","TON Einschaltverzögerung, TOF Ausschalt, TP Impuls","Analognormierung 0-27648 = 0-10V verstehen"]},
+{tag:11,thema:"Ablaufsteuerung GRAFCET",kat:"Steuerungstechnik",koennen:["Schritte, Transitionen, Aktionen nach DIN EN 60848","Schrittkette gegen Retrigger verriegeln","NOT-AUS Kategorie 0 oder 1 nach Risikoanalyse","Zweihandbedienung 0,5s Synchronität erklären"]},
+{tag:12,thema:"Pneumatik Grundlagen",kat:"Pneumatik",koennen:["Drucklufterzeugung, Wartungseinheit Filter Regler","Wegeventile 3/2, 5/2 – Anschlüsse und Stellungen","Einfach- und doppeltwirkende Zylinder unterscheiden","Kraft berechnen F=p·A, 1 bar =0,1 N/mm²"]},
+{tag:13,thema:"Pneumatik Schaltungen",kat:"Pneumatik",koennen:["Abluftdrosselung für ruckelfreien Lauf","Schnellentlüftung und Eilhub","UND Zweidruck und ODER Wechselventil","Reed Sensor für Endlagen, Vakuumsauger prüfen"]},
+{tag:14,thema:"IT Systeme und Vernetzung",kat:"IT-Systeme",koennen:["PROFINET Industrial Ethernet vs PROFIBUS RS485","IP Adresse /24 Netz und Host trennen","Managed Switch VLAN MRP Ring","GSDML Datei, Device Name, HMI Meldungen quittieren"]},
+{tag:15,thema:"Mechanik Grundlagen",kat:"Mechanik",koennen:["Passung H7/g6 Spielpassung erklären","Toleranzen Nennmaß Höchstmaß Mindestmaß","Schraube 8.8 = 800 N/mm² Zugfestigkeit","Nord-Lock statt Federring bei Schwingung"]},
+{tag:16,thema:"Werkstoffe und Fertigung",kat:"Mechanik",koennen:["S235JR Baustahl 235 N/mm², AlMg3 gut schweißbar","Rauheit Rz 16 grob gefräst, Rz 4 geschliffen","Fertigungsverfahren Drehen Fräsen Bohren","Kunststoffe und Korrosionsschutz benennen"]},
+{tag:17,thema:"Lager und Führungen",kat:"Mechanik",koennen:["Kugellager 6205 Bohrung 25mm = 05×5","Lagerarten ZZ 2RS, Lagerluft, Vorspannung","Schmierung NLGI 2 Standard für Wälzlager","Linearführungen und Wartungsintervalle"]},
+{tag:18,thema:"Technische Zeichnungen",kat:"Mechanik",koennen:["Ansichten, Schnitte, Bemaßung lesen","Oberflächenzeichen und Formtoleranzen","Stückliste und Positionsnummern","Messschieber Nonius 0,05mm ablesen"]},
+{tag:19,thema:"Wirtschafts- und Sozialkunde",kat:"Wirtschafts- und Sozialkunde",koennen:["BBiG Probezeit 1-4 Monate, Kündigung Fristen","Betriebsrat ab 5 Arbeitnehmer, Wahlberechtigung","Sozialversicherung 5 Säulen, 50/50 außer UV","Arbeitszeitgesetz 8h Regel, 11h Ruhe, DSGVO Rechtsgrundlagen"]},
+{tag:20,thema:"Fehlersuche systematisch",kat:"Mechanik",koennen:["Vorgehensweise: Sichtprüfung, Messen, Eingrenzen, Tauschen","Dokumentation Prüfprotokoll und Übergabe","Werkzeuge ESD Schutz und PSA anwenden","Kundenkommunikation Fachbegriffe verständlich"]},
+{tag:21,thema:"Prüfungstraining komplett",kat:"Grundlagen Elektrotechnik",koennen:["Alle Kategorien mischen und laut erklären","Simulation ohne Unterlagen bestehen","Zeitmanagement: erst lesen, dann planen, dann bauen","Ruhe bewahren, Funktionstest und Sicherheitsprüfung"]},
+];
+
+let active = "lernplan";
+let checked = JSON.parse(localStorage.getItem("ap1_days_"+LIVE_URL)||"[]");
+
+function save(){localStorage.setItem("ap1_days_"+LIVE_URL,JSON.stringify(checked)); render();}
+
+function renderTabs(){
+ const tabs=[{id:"lernplan",label:"Lernplan • 21 Tage"},{id:"katalog",label:"Prüferkatalog"},{id:"teilen",label:"Teilen • QR"}];
+ document.getElementById("tabs").innerHTML=tabs.map(t=>`<button class="tab ${active===t.id?'active':''}" onclick="active='${t.id}';render()">${t.label}</button>`).join("");
+}
+
+function render(){
+ renderTabs();
+ const main=document.getElementById("main");
+ if(active==="lernplan"){
+   const done=checked.length; const pct=Math.round(done/21*100);
+   main.innerHTML=`
+   <div class="card" style="background:linear-gradient(135deg,#151517,#1E1E20);border-color:#2A2A2E">
+     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
+       <div><div style="font-size:11px;font-weight:800;letter-spacing:0.12em;color:var(--accent);text-transform:uppercase">21 Tage • Reines Wissen ohne Zeitdruck</div>
+       <h2 style="margin-top:8px">Dein Lernplan für AP1</h2>
+       <p class="small" style="max-width:48ch;margin-top:8px">Übersichtlich für iPad Pro gestaltet. Jeder Tag fokussiert ein Thema. Ohne Zeitangaben – du entscheidest dein Tempo. Direkt abhakbar, offline gespeichert.</p></div>
+       <div style="min-width:200px;background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:14px"><div style="display:flex;justify-content:space-between"><span style="font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase">Fortschritt</span><span style="font-size:12px;font-weight:700">${done}/21</span></div><div style="margin-top:10px;font-size:32px;font-weight:800">${pct}%</div><div style="margin-top:8px;height:8px;background:#2A2A2E;border-radius:999px;overflow:hidden"><div style="height:100%;background:var(--accent);width:${pct}%"></div></div></div>
+     </div>
+   </div>
+   <div class="grid">
+     ${LERNTAGE.map(d=>{
+       const isDone=checked.includes(d.tag);
+       return `<div class="card" style="display:flex;gap:12px;align-items:flex-start;${isDone?'opacity:0.7':''}">
+         <div class="check ${isDone?'done':''}" onclick="toggleDay(${d.tag})">${isDone?'✓':d.tag}</div>
+         <div style="flex:1"><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><h3 style="margin:0">Tag ${d.tag} • ${d.thema}</h3><span class="chip">${d.kat}</span></div>
+         <ul class="kon-list">${d.koennen.map(k=>`<li>${k}</li>`).join("")}</ul></div></div>`
+     }).join("")}
+   </div>
+   <div class="card" style="margin-top:16px"><h3>Checkliste Prüfung</h3><p class="small">Lerne nicht nur Definitionen auswendig. Erkläre jedes Thema laut in eigenen Worten und rechne mindestens eine Aufgabe dazu. Bei elektrischen Anlagen gelten die einschlägigen Sicherheitsregeln und Normen; praktische Arbeiten nur entsprechend deiner Unterweisung durchführen.</p></div>
+   `;
+ } else if(active==="teilen"){
+   main.innerHTML=`
+   <div class="card"><h2>Teilen für Azubis</h2><p class="small">Andere Azubis scannen diesen QR und installieren die App als Icon auf dem Homescreen. Kein Profil nötig.</p>
+   <div class="qrbox" style="margin-top:16px">
+     <div id="qrcode"></div>
+     <pre class="url">${LIVE_URL}</pre>
+     <p class="small" style="text-align:center">1. QR mit iPad Kamera scannen<br>2. In Safari öffnen<br>3. Teilen → Zum Home-Bildschirm → Hinzufügen</p>
+   </div>
+   <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+     <button class="primary" style="background:var(--surface2);border:1px solid var(--border);color:var(--text)" onclick="navigator.clipboard.writeText(LIVE_URL);alert('Link kopiert!')">Link kopieren</button>
+     <a href="${LIVE_URL}" target="_blank" style="text-decoration:none"><button class="primary">Live öffnen</button></a>
+   </div>
+   </div>`;
+   // simple QR using canvas - generate basic QR via api.qrserver.com as fallback for offline? Use canvas generation
+   const qrDiv=document.getElementById("qrcode");
+   const img=document.createElement("img");
+   img.src=`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(LIVE_URL)}`;
+   img.style.width="220px"; img.style.height="220px"; img.style.borderRadius="12px";
+   qrDiv.appendChild(img);
+ } else {
+   main.innerHTML=`<div class="card"><h2>Prüferfragen-Katalog AP1 2026</h2><p class="small">80 Fragen in dieser GitHub Version – volle Version in der Haupt-App.</p><div style="margin-top:12px"><button class="primary" onclick="active='lernplan';render()">Zum Lernplan</button></div></div>`;
+ }
+}
+
+function toggleDay(tag){
+ if(checked.includes(tag)) checked=checked.filter(t=>t!==tag); else checked.push(tag);
+ save();
+}
+
+render();
+</script>
+</body>
+</html>
